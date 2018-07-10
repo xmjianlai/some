@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.bird {
+			width: 150px;
+			height: 100px;
+			background:  url(images/bird.fw.png) 0 0 no-repeat;
+			position: absolute;
+			left: 0;
+			top: 0;
+			animation:feixiang .3s steps(7) infinite,huaxiang 4s infinite ;
+		}
+		@keyframes feixiang {
+			0%{
+				background-position: 0 0;				
+			}
+			100%{
+				background-position: -1050px 0;
+			}
+		}
+		@keyframes huaxiang {
+			0%{
+				left: 0;
+				transform:rotateY(0deg);
+			}
+			49%{
+				transform:rotateY(0deg);
+			}
+			50%{
+				left: 800px;
+				transform:rotateY(180deg);
+			}
+			99% {
+				transform:rotateY(180deg);
+			}
+			100%{
+				left: 0;
+				transform:rotateY(0deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="bird"></div>
+</body>
+</html>

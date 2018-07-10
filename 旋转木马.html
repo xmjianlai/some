@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>旋转木马轮播图</title>
+  <link rel="stylesheet" href="css/css.css"/>
+  <style>
+    .slide .slide1 {
+      width: 400px;
+      top: 20px;
+      left: 50px;
+      opacity: 0.2;
+      z-index: 2;
+    }
+    .slide .slide2 {
+      width: 600px;
+      top: 70px;
+      left: 0;
+      opacity: 0.8;
+      z-index: 3;
+    }
+    .slide .slide3 {
+      width: 800px;
+      top: 100px;
+      left: 200px;
+      opacity: 1;
+      z-index: 4;
+    }
+    .slide .slide4 {
+      width: 600px;
+      top: 70px;
+      left: 600px;
+      opacity: 0.8;
+      z-index: 3;
+    }
+    .slide .slide5 {
+      width: 400px;
+      top: 20px;
+      left: 750px;
+      opacity: .2;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <div class="slide" id="slide">
+    <ul>
+      <li class="slide1"><a href="#"><img src="images/slidepic3.jpg" alt=""/></a></li>
+      <li class="slide2"><a href="#"><img src="images/slidepic2.jpg" alt=""/></a></li>
+      <li class="slide3"><a href="#"><img src="images/slidepic1.jpg" alt=""/></a></li>
+      <li class="slide4"><a href="#"><img src="images/slidepic4.jpg" alt=""/></a></li>
+      <li class="slide5"><a href="#"><img src="images/slidepic5.jpg" alt=""/></a></li>
+    </ul>
+    <div class="arrow" id="arrow">
+      <a href="javascript:;" class="prev" id="arrLeft"></a>
+      <a href="javascript:;" class="next" id="arrRight"></a>
+    </div>
+  </div>
+</div>
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+$(function(){
+//  第一步移入移出事件
+  $('#wrap').on('mouseenter',function(){
+    $('#arrow').css('opacity',1);
+
+  })
+  $('#wrap').on('mouseleave',function(){
+    $('#arrow').css('opacity',0);});
+//第二部点击又箭头图片转换
+//    获取页面的全部li
+    var $lis=$('#wrap li');
+//  获取对应的元素
+  var arr=["slide1","slide2","slide3","slide4","slide5"]
+    $('#arrRight').click(function(){
+//      获取数组最后一项
+    var last=arr.pop();
+//      因为赋值是从前往后赋值的
+      arr.unshift(last);
+//    遍历li给li添加元素
+        for(var i=0;i < $lis.length;i++){
+//          去除原本的类名添加对应的类名
+            $lis.eq(i).removeClass().addClass(arr[i]);
+          }
+  })
+
+  $('#arrLeft').click(function(){
+//      获取数组第一一项
+    var frst =arr.shift();
+//      因为赋值是从后往前赋值的
+    arr.push(frst);
+//    遍历li给li添加元素
+    for(var i=0;i < $lis.length;i++){
+//          去除原本的类名添加对应的类名
+      $lis.eq(i).removeClass().addClass(arr[i]);
+    }
+  })
+
+   var tiemd= setInterval(function(){
+    $('#arrRight').click();
+  },1000)
+
+  $('.slide').on('mouseenter',function(){
+   clearInterval(tiemd);
+  })
+  $('.slide').on('mouseleave',function(){
+    clearInterval(tiemd);
+    tiemd=setInterval(function(){
+      $('#arrRight').click();
+    },1000)
+  })
+
+})
+
+
+</script>
+
+</body>
+</html>

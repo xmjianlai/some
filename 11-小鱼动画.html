@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			background-color: skyblue;
+		}
+		.fish {
+			width: 174px;
+			height: 126px;
+			background: url(fish-12-126.png) 0 0 no-repeat;
+			/* 画面数 - 1 */
+			/* 动画可以写多组 */
+			animation: bai 1s steps(11) infinite,you 5s linear infinite;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		@keyframes bai {
+			to {
+				background-position: 0 -1386px;
+			}
+		}
+		@keyframes you {
+			0%{
+				left: 0;
+			}
+			25%{
+				left: 800px;
+				transform: rotate(0deg);
+			}
+			50%{
+				left: 800px;
+				transform: rotate(180deg);
+			}
+			75%{
+				left: 0px;
+				transform: rotate(180deg);
+			}
+			100%{
+				left: 0px;
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="fish"></div>
+</body>
+</html>

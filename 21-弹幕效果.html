@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    html, body {
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+      height: 100%;
+      font-family: "微软雅黑";
+      font-size: 62.5%;
+    }
+
+    .boxDom {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .idDom {
+      width: 100%;
+      height: 100px;
+      background: #666;
+      position: fixed;
+      bottom: 0px;
+    }
+
+    .content {
+      display: inline-block;
+      width: 430px;
+      height: 40px;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+
+    .title {
+      display: inline;
+      font-size: 4em;
+      vertical-align: bottom;
+      color: #fff;
+    }
+
+    .text {
+      border: none;
+      width: 300px;
+      height: 30px;
+      border-radius: 5px;
+      font-size: 2.4em;
+    }
+
+    .btn {
+      width: 60px;
+      height: 30px;
+      background: #f90000;
+      border: none;
+      color: #fff;
+      font-size: 2.4em;
+    }
+
+    span {
+      width: 300px;
+      height: 40px;
+      position: absolute;
+      overflow: hidden;
+      color: #000;
+      font-size: 4em;
+      line-height: 1.5em;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="boxDom" id="boxDom">
+  <div class="idDom" id="idDom">
+    <div class="content">
+      <p class="title">吐槽:</p>
+      <input type="text" class="text" id="text"/>
+      <button type="button" class="btn" id="btn">发射</button>
+    </div>
+  </div>
+</div>
+</body>
+
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+  $(function () {
+
+    //注册事件
+    var colors = ["red", "green", "hotpink", "pink", "cyan", "yellowgreen", "purple", "deepskyblue"];
+
+    //思路：
+    //1. 给按钮注册点击事件
+    //2. 获取input框的value值
+    //3. 动态生成一个span
+    //4. 给span设置一个随机颜色
+    //5. 让span在屏幕的外面：left: 随机的top
+    //6. 把span添加到boxDom
+    //7. 给span添加动画，让span跑到最左边，动画结束的时候，需要自杀。
+
+    $("#btn").click(function () {
+
+      //随机颜色
+      var randomColor = parseInt(Math.random() * colors.length);
+      var randomHeight = parseInt(Math.random() * 401);
+
+
+      //获取input的内容
+      var content = $("#text").val();
+      $("#text").val('');
+
+      //动态生成span
+
+      $("<span>" + content + "</span>")
+          .css("color", colors[randomColor])
+          .css("left", 1366)
+          .css("top", randomHeight)
+          .appendTo("#boxDom")
+          .animate({left: -300}, 5000, "linear", function () {
+            $(this).remove();
+          });
+
+      //var $span = $("<span>" + content + "</span>");
+      //$span.css("color", colors[randomColor]);
+
+
+    });
+
+
+  });
+
+</script>
+</html>
